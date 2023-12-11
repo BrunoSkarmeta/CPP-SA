@@ -30,14 +30,16 @@ Dada un orden de prioridad $s=(e_1,\dots,e_m)$, queremos obtener $P_s$ camino fa
 2. Como $e_1=0v$, $P_s \leftarrow P_s + v$
 3. $i \leftarrow 1$
 4. Definimos variable VérticeActual $\leftarrow v$
-5. Definimos AristaActual $\leftarrow e_i=a_1b_1$ y AristaSiguiente $\leftarrow e_{i+1}=a_2b_2$ (en el caso $i=1, a_1=0, b_1=v$)
-6. Si VérticeActual es incidente en $e_2$, digamos $e_2 = b_1b_2$, actualizamos $P_s \leftarrow P_s + b_2$ y VérticeActual $\leftarrow b_2$
+5. Definimos AristaActual $\leftarrow e_i=a_1b_1$ y AristaSiguiente $\leftarrow e_{i+1}=a_2b_2$ (en el caso $i=1: a_1=0, b_1=v$) 
+6. Si VérticeActual es incidente en $e_2$, digamos $e_2 = b_1b_2$, actualizamos $P_s \leftarrow P_s + b_2$ y VérticeActual $\leftarrow b_2$ (por simplicidad $e_i = e_1, e_{i+1}=e_2$
 7. Si VérticeActual == $b_1$ y $e_2$ es incidente en $a_1$, digamos $e_2=a_1b_2$, actualizamos $P_s \leftarrow P_s + a_1 + b_2$ y VérticeActual $\leftarrow b_2$
-8. Si no, calcular camino de peso mínimo desde VérticeActual a $a_2$ y $b_2$ y tomar el mínimo entre ellos, llamémoslo P, y digamos que llega a $a_2$, actualizar $P_s \leftarrow P_s + P + b_2$ y VérticeActual $\leftarrow b_2$, además de esto, todas las aristas que se hayan tomado en P que todavía no se hayan recorrido en el orden de prioridad se eliminan del orden de prioridad, ya que al ya haber pasado por ellas no hay necesidad de pasar nuevamente.
+8. Si no, calcular camino de peso mínimo desde VérticeActual a $a_2$ y $b_2$ y tomar el mínimo entre ellos, llamémoslo $P$, y digamos que llega a $a_2$, actualizar $P_s \leftarrow P_s + P + b_2$ y VérticeActual $\leftarrow b_2$, además de esto, todas las aristas que se hayan tomado en $P$ que todavía no se hayan recorrido en el orden de prioridad se eliminan del orden de prioridad, ya que al ya haber pasado por ellas no hay necesidad de pasar nuevamente.
 9. Si no se ha llegado al final del orden de prioridad, $i\leftarrow i+1$ y volver a 5.
 10. Conectar VérticeActual con 0, con las mismas reglas que lo anterior.
 
-
+El algoritmo es correcto para lo que queremos pues:
+- Pasa por todas las aristas, puesto que si esto no pasa, quiere decir que alguna de las aristas del orden de prioridad se ignoró, digamos que esta arista es $e$, hay dos casos, el primero es que en algún momento la variable AristaActual vale $e$, si esto pasa, notamos que necesariamente en el paso anterior en cualquiera de los tres casos, en 6., 7. u 8. se pasa necesariamente por ambos vértices de $e$ por lo que esto no es posible. El segundo caso es que AristaActual nunca haya sido $e$, esto quiere decir que es parte de las aristas eliminadas 8. pero esto también genera una contradicción pues esta arista se añade a $P_s$ pues está dentro del camino $P$.
+- Es efectivamente un camino cerrado, es un camino dado que toda la sucesión de vértices que se añaden a $P_s$ son siempre conectados a partir de aristas, lo que genera un recorrido factible. Por otra parte, considerando 1. y 10., necesariamente el camino empieza y termina en 0.
 
 
 
