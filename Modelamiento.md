@@ -1,1 +1,30 @@
+# Modelamiento
+
+Para comenzar a modelar el problema, lo primero es definir los elementos con los cuales trabajaremos, para esto, primero describamos el CPP.
+
+
+### 1. Chinese Postman Problem y el grafo de configuraciones
+Dado un grafo $G = (V,E)$ simple, finito y conexo con una función de pesos $w$ en sus aristas, buscamos un camino cerrado desde un vértice fijo inicial y de peso mínimo, que pase por todas sus aristas. Para esto, notamos que definir una secuencia de aristas como soluciones factibles es algo complejo, dado que son elementos de $E^\mathbb{N}$, como consecuencia, lo que haremos será  considerar un $\textbf{orden de prioridad}$ para pasar por las aristas y así construir nuestro grafo de configuraciones. Esto es, dado $|E|=m$, definimos $s_0 = (e_1,e_2,\dots,e_m)$ como un orden de prioridad por el orden en el cual se deben recorrer todas las aristas del grafo.
+
+- Notamos que para haber factibilidad, debe pasar por todas las aristas, o sea que $e_i\neq e_j$ para todo $i\neq j$ dentro de $s_0$, de tal manera que cada arista de $E$ aparezca de forma única en la secuencia ya que todas tienen que tener prioridad para pasar por ellas.
+- Definimos de forma análoga $s_{n+1}$ como el intercambio de $e_i$ con $e_j$ dentro de $s_n$ para algún par $i,j \in [m]$, o sea, $s_{n+1}$ es una permutación entre el $i$-ésimo y el $j$-ésimo elemento de la secuencia $s_n$.
+- Diremos que dos ordenes de prioridad $\sigma_1$ y $\sigma_2$ (secuencias) son $\textbf{adyacentes}$ si $\sigma_2$ se puede obtener de $\sigma_1$ permutando dos elementos, claramente con la definición anterior $s_n$ es adyacente de $s_{n+1}$ para todo $n$, y además es una relación simétrica.
+- Juntando todas estas ideas anteriores, tenemos que cualquier sucesión $(s_i)_{i\in\mathbb{N}}$ de ordenes de prioridad son todas soluciones factibles si construimos un camino cerrado en cada $s_i$ que parta desde nuestro vértice inicial y pase por las aristas de la secuencia, intentando pasar por ellas en el orden establecido por su prioridad.
+
+Ahora teniendo en cuenta esto, nuestras configuraciones serán todas las posibles permutaciones de $E$, y la adyacencia está dada por lo antes explicado. Ahora para relacionarlo con el CPP, se tiene que para un orden de prioridad $\sigma$, reconstruiremos un camino cerrado que pase por las aristas con un algoritmo llamado $\textbf{Reconstrucción de Caminos}$, dado que el solo tener aristas en una secuencia puede dar para muchos caminos posibles que cumplan el orden de prioridad, pero queremos que siempre se reconstruya de la misma manera, para así poder hacer comparaciones objetivas, y por lo tanto, buscar soluciones al CPP.
+
+Por simplicidad, fijaremos el primer nodo inicial $v_0 = 0$, de tal manera que siempre la arista inicial deba ser adyacente al cero y solo se permutará por aristas que también sean adyacentes al cero.
+
+### 2. Simulated Annealing
+
+
+
+Acá es donde entra el Simulated Annealing, donde tendremos una cadena de Markov $X_n$ que represente el orden de prioridad acutal, para esto, primero nos definimos $X_0 = s_0$ como guess inicial de solución, calculamos su respectivo camino en $G$ con el algoritmo de reconstrucción de caminos, y uniformemente dentro de $s_0$ elegimos dos aristas para permutar, generando su vecino $s_1$, que también le reconstruimos su camino dentro de $G$, con esto, podremos tener el peso $w(s_0)$ y $w(s_1)$, con el que a partir de los parámetros elegidos y la temperatura correspondiente a estas dos configuraciones, actualizamos $X_1$ como $s_0$ o bien $s_1$. (ver https://en.wikipedia.org/wiki/Simulated_annealing)
+
+Por lo visto anteriormente, cualquier sucesión de ordenes de configuraciones es siempre factible para el CPP mientras que el algoritmo de reconstrucción de caminos asegure pasar por todas las aristas y volver al vértice inicial. Por lo que, si definimos iterativamente la cadena de la forma anterior dada una cierta sucesión de ordenes de prioridad elegidas aleatoriamente ${s_0,s_1,\dots}$ , toda la cadena $(X_n)_{n\in\mathbb{N}}$ será siempre de caminos factibles.
+
+### 3. Algoritmo de Reconstrucción de Caminos
+
+
+
 
