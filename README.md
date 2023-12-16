@@ -9,3 +9,8 @@ La construcción del grafo y el acercamiento a la resolución del problema, incl
 Además de este ejemplo, también se introdujeron dos grafos más, de 20 y 35 nodos respectivamente, cuyas soluciones (caminos) se encuentran representadas en los archivos scatter20.gif y scatter35.gif. Cabe destacar que en el caso del grafo de 20 nodos, el tiempo de ejecución estuvo debajo del minuto, mientras que con 35 nodos, la ejecución tomó alrededor de 5 minutos para cada CdM.
 
 Finalmente, se utiliza una base de datos online de las ciudades de Chile, dada por: https://simplemaps.com/data/cl-cities. Sobre la base de esta, se obtiene la latitud/longitud de las ciudades, se pasan a sistema de coordenada en X-Y, se calcula la distancia, y con ello se construye un grafo de 30 nodos (tomando 30 ciudades) conexo. Este grafo se construye de manera aleatoria (en términos de cuáles aristas se toman y cuáles no), lo cual puede representar que solo hay ciertas rutas disponibles a seguir a través de las distintas ciudades. Se ejecuta el algoritmo y se obtiene un resultado que está cerca de lo que sería un óptimo euleriano (peso igual a la suma de pesos totales de aristas). El resultado se observa en scatter30_ciudades.gif.
+
+Referencias:
+1. Jing Zhang (2011). Modeling and Solution for Multiple Chinese Postman CSEE.
+2. Pareto Software, LLC. (2023). Chile Cities Database. SimpleMaps. https://simplemaps.com/data/cl-cities
+3. Nokia Mobile Phones, Nokia 2110 User’s Guide, 1996.
