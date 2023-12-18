@@ -10,7 +10,7 @@ Además de este ejemplo, también se introdujeron dos grafos más, de 20 y 35 no
 
 Finalmente, se utiliza una base de datos online de las ciudades de Chile, dada por: https://simplemaps.com/data/cl-cities. Sobre la base de esta, se obtiene la latitud/longitud de las ciudades, se pasan a sistema de coordenada en X-Y, se calcula la distancia, y con ello se construye un grafo de 30 nodos (tomando 30 ciudades) conexo. Este grafo se construye de manera aleatoria (en términos de cuáles aristas se toman y cuáles no), lo cual puede representar que solo hay ciertas rutas disponibles a seguir a través de las distintas ciudades. Se ejecuta el algoritmo y se obtiene un resultado que está cerca de lo que sería un óptimo euleriano (peso igual a la suma de pesos totales de aristas). El resultado se observa en scatter30_ciudades.gif.
 
-IMPORTANTE: Hay que tener un cuidado especial cuando se ejecuta el código para obtener las animaciones, pues hay que ejecutarlos dos veces, guardando el camino óptimo en una lista manualmente. Esto se indica en algoritmo.ipynb.
+IMPORTANTE: Hay que tener un cuidado especial cuando se ejecuta el código para obtener las animaciones, pues hay que ejecutarlos dos veces, guardando el camino óptimo en una lista manualmente. Esto se indica en algoritmo.ipynb. Recordar que también hay que importar nuevamente las librerías (primera celda).
 
 Referencias:
 1. Jing Zhang (2011). Modeling and Solution for Multiple Chinese Postman CSEE.
